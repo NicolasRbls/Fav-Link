@@ -1,17 +1,40 @@
 :root {
+    /* Light Mode (Default) */
     --primary: #6366f1;
     --primary-glow: rgba(99, 102, 241, 0.4);
-    --bg-dark: #0f172a;
+
+    --bg-app: #f0f4f8;
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: rgba(0, 0, 0, 0.1);
+
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.4);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+    --font-family: 'Outfit', sans-serif;
+    --anim-speed: 0.3s;
+
+    /* Background Gradient Colors */
+    --bg-grad-1: rgba(99, 102, 241, 0.1);
+    --bg-grad-2: rgba(236, 72, 153, 0.1);
+}
+
+:root.dark {
+    /* Dark Mode */
+    --bg-app: #0f172a;
     --bg-card: rgba(30, 41, 59, 0.7);
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --border: rgba(255, 255, 255, 0.1);
+
     --glass-bg: rgba(15, 23, 42, 0.6);
     --glass-border: 1px solid rgba(255, 255, 255, 0.08);
     --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 
-    --font-family: 'Outfit', sans-serif;
-    --anim-speed: 0.3s;
+    --bg-grad-1: rgba(99, 102, 241, 0.15);
+    --bg-grad-2: rgba(236, 72, 153, 0.15);
 }
 
 * {
@@ -23,10 +46,11 @@
 
 body {
     font-family: var(--font-family);
-    background-color: var(--bg-dark);
+    background-color: var(--bg-app);
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
+    transition: background-color var(--anim-speed), color var(--anim-speed);
 }
 
 /* Background Animation */
@@ -38,9 +62,10 @@ body {
     height: 100vh;
     z-index: -1;
     background:
-        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+        radial-gradient(circle at 10% 20%, var(--bg-grad-1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, var(--bg-grad-2) 0%, transparent 40%);
     pointer-events: none;
+    transition: background 0.5s;
 }
 
 /* Container */
@@ -123,7 +148,7 @@ body {
     background: var(--bg-card);
     border: var(--glass-border);
     border-radius: 16px;
-    color: white;
+    color: var(--text-main);
     font-family: inherit;
     font-size: 1rem;
     backdrop-filter: blur(12px);
@@ -337,14 +362,15 @@ body {
 }
 
 .modal {
-    background: #1e293b;
+    background: var(--bg-app);
     width: 100%;
     max-width: 500px;
     border-radius: 24px;
     padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: var(--glass-border);
     transform: translateY(20px);
-    transition: transform 0.3s;
+    transition: transform 0.3s, background-color var(--anim-speed);
+    box-shadow: var(--shadow);
 }
 
 .modal-overlay[aria-hidden="false"] .modal {
@@ -385,10 +411,10 @@ body {
 .form-group input {
     width: 100%;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(125, 125, 125, 0.1);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    color: white;
+    color: var(--text-main);
     font-size: 1rem;
     font-family: inherit;
 }
@@ -396,7 +422,7 @@ body {
 .form-group input:focus {
     outline: none;
     border-color: var(--primary);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(125, 125, 125, 0.15);
 }
 
 .btn-primary {
@@ -421,9 +447,9 @@ body {
     width: 100%;
     padding: 0.8rem;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(125, 125, 125, 0.1);
+    color: var(--text-main);
+    border: 1px solid var(--border);
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
@@ -435,7 +461,7 @@ body {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(125, 125, 125, 0.2);
 }
 
 .btn-danger {

@@ -283,7 +283,13 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 }
 
 themeToggle.addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.toggle('dark');
+    const icon = themeToggle.querySelector('i');
+    if (isDark) {
+        icon.classList.replace('ph-sun', 'ph-moon');
+    } else {
+        icon.classList.replace('ph-moon', 'ph-sun');
+    }
 });
 
 // --- Settings ---
